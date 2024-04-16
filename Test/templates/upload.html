@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузить файл</title>
+    <!-- Ссылка на файл стилей -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Загрузить файл</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit">Загрузить</button>
+        </form>
+
+        {% if video_file %}
+        <h2>Загруженное видео</h2>
+        <video width="320" height="240" controls>
+            <source src="{{ url_for('static', filename='uploads/' + video_file.filename) }}" type="video/mp4">
+            Ваш браузер не поддерживает тег video.
+        </video>
+        {% endif %}
+
+        {% if result %}
+        <h2>Результат</h2>
+        <textarea rows="4" cols="50" readonly>{{ result }}</textarea>
+        {% endif %}
+    </div>
+</body>
+</html>
